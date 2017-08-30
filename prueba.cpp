@@ -4,17 +4,23 @@
 #include <eigen3/Eigen/Eigenvalues>
 using Eigen::MatrixXd;
 using Eigen::EigenSolver;
-int main()
-{
-  MatrixXd m = MatrixXd(2,2);
-  m(0,0) = 3;
-  m(1,0) = 0;
-  m(0,1) = 2;
-  m(1,1) = 1;
-  std::cout << m << std::endl;
-  EigenSolver<MatrixXd> eigensolver(m);
-  std::cout<<eigensolver.eigenvalues()<<std::endl;
+using Eigen::SelfAdjointEigenSolver;
+int main(){
   int n=30;
+  int i;
+  int j;
   MatrixXd s = MatrixXd(n,n);
-
+  for(i=0; i<=n-1 ;i++){
+    for(j=0;j<=n-1;j++){
+      if(i<=j){
+	s(i,j)=n-j;
+      }
+      if(i>j){
+	s(i,j)=n-i;
+      }
+    }
+  }
+  std::cout<< s << std::endl;
+  SelfAdjointEigenSolver<MatrixXd> eigensolver(s);
+  std::cout<<eigensolver.eigenvalues()<<std::endl;
 }
