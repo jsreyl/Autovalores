@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cmath>
-#include <Eigen/Dense>
-#include <Eigen/Core>
-#include <Eigen/Eigenvalues>
+#include <eigen3/Eigen/Dense>
+#include <eigen3/Eigen/Core>
+#include <eigen3/Eigen/Eigenvalues>
 using Eigen::MatrixXd;
 using Eigen::SelfAdjointEigenSolver;
 int v(int i,int j,int n){
@@ -26,17 +26,16 @@ int main(){
       s(i,j)=v(i,j,n);
     }
   }
-  std::cout<<"La Matriz simetrica \n"<<"\n"<<s<<std::endl;
   SelfAdjointEigenSolver<MatrixXd> es(s);
   std::cout<<"\n"<<"i"<<"\t"<<"Auto valor"<<"\t"<<"Auto valor t"<<"\t"<<"error porcentual \n"<<std::endl;
-  std::cout.setf(std::ios::scientific);
+  //std::cout.setf(std::ios::scientific);
   for(int k=1;k<=n;k++){
     double E = es.eigenvalues()[n-k];
     double E_r = (1)/(2-(2*std::cos(((2*k)-1)*(M_PI)/((2*n)+1))));  
     double d = (std::abs(E-E_r))/E_r;
     std::cout<<k<<"\t"<<E<<"\t"<<E_r<<"\t"<<d<<std::endl;
   }
-  std::cout.unsetf(std::ios::scientific);
+  //std::cout.unsetf(std::ios::scientific);
   std::cout<<"\n"<<"Matriz de auto vectores \n\n";
   std::cout<<es.eigenvectors()<<std::endl;
 }

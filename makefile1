@@ -1,0 +1,7 @@
+CXX = g++
+CXXFLAG = -I
+CXXFLAG1 = -o
+DIR = ~/local/include
+FILE = prueba.cpp
+prueba.x:
+	$(CXX) $(CXXFLAG) $(DIR) $(FILE) $(CXXFLAG1) $@
